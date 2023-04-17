@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonInput, IonicModule } from '@ionic/angular';
 
 @Component({
@@ -6,12 +7,17 @@ import { IonInput, IonicModule } from '@ionic/angular';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule],
+  imports: [IonicModule,ReactiveFormsModule,FormGroup],
 })
 export class HomePage {
   calcular: any;
   cor:any;
-  constructor() {}
+  constructor(private fb:FormBuilder) {
+    this.FormGroup=fb.group({
+      alcool :['',[Validators.required]],
+      gasolina:['',[Validators,required,Validators.min(0.1)]]
+    });
+  }
 
 
 ngOnInit(){
@@ -32,5 +38,9 @@ resultado(alcool: IonInput, gasolina: IonInput) {
      this.cor = "#28ba62"
    }
   }
+ }
+
+ limpar(){
+  FormGroup
  }
 }
